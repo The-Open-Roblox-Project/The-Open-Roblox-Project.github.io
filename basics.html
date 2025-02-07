@@ -15,7 +15,7 @@
 	<div id="content">
 		<h1>The Basics</h1>
 		
-		<h2>How to find and get offsets/addressess?</h2>
+		<h2 id="offsets-addresses">How to find and get offsets/addressess?</h2>
 			<p>
 				You can find most offsets using Cheat Engine by scanning for values, pointers, and structures while attached to Roblox <bold>Studio</bold> (Roblox Studio doesn't have Hyperion so Cheat Engine isn't detected).<br>
 				Here is a good <a href="https://www.youtube.com/watch?v=UzJLyAgjgqY">tutorial</a> on how to find most instance offsets in Cheat Engine.
@@ -63,7 +63,7 @@
 		</p>
 		<br>
 
-		<h3>How to get the fake DataModel?</h3>
+		<h3 id="fake-datamodel">How to get the fake DataModel?</h3>
 		<p>
 			To get the fake DataModel all you have to do is read the pointer at <samp style="color: mediumslateblue;">0x8</samp> within the DataModel deleter.<br>
 			For example: <pre>
@@ -82,7 +82,7 @@
 		</p>
 		<br>
 
-		<h3>How to get the real DataModel?</h3>
+		<h3 id="real-datamodel">How to get the real DataModel?</h3>
 		<p>
 			Getting the real DataModel is very easy if you have the fake DataModel.<br>
 			All you have to do is read the pointer at <samp style="color: mediumslateblue;">0x1a8</samp> within the fake DataModel.<br>
