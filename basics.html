@@ -72,13 +72,12 @@
 			Getting the deleter address is very easy that's why I chose this method.
 			Here is a step by step tutorial on getting the deleter address by me:
 			<ol>
-				<li>Search for "WebMessage" in IDA</li>
-				<li>Scroll down until you see something among the lines of: <pre> <span style="color: gray;">LABEL_4:</span>
-  <span style="color: gray;">v11</span> = <span style="color: rgb(255, 222, 122)">sub_71E330</span>();            <span style="color: green;">// You can rename this function to something like RBX::DataModel::GetDeleter() by pressing N on it.</span>
-  *(<span style="color: mediumseagreen;">_QWORD</span> *)&<span style="color: gray;">v17</span> = <span style="color: mediumslateblue;">0LL</span>;</pre></li>
+				<li>Search for "%s. Retrying... (%d)" in Strings sub-view in IDA</li>
+				<li>Scroll down until you see something among the lines of: <pre><span style="color: gray;">LABEL_55:</span>
+	<span style="color: gray;">v30</span> = <span style="color: rgb(255, 222, 122)">sub_7088C0</span>(); <span style="color: green">// This is the function we need</span>
+	<span style="color: rgb(255, 222, 122)">sub_70AEB0</span>(<span style="color: gray;">v30</span>, <span style="color: mediumslateblue;">1LL</span>, &<span style="color: gray">v9</span>, <span style="color: mediumslateblue;">0xFFFFFFFFFLL</span>)</pre>
 				<li>Double click on the function to go to it.</li>
 				<li>The return value of that function is the DataModel deleter. For example: <samp><span style="color: salmon">return</span> &<span style="color: rgb(255, 222, 122)">unk_5BC01C0</span>;</samp> 0x5BC01C0(in this case) being the deleter's address.</li>
-				<li>Now you can use it to get the fake DataModel.</li>
 			</ol>
 		</p>
 		<br>
