@@ -4,7 +4,8 @@ body {
 	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;
-	display: flex;
+	width: 100%;
+	overflow-x: hidden;
 }
 
 #sidebar {
@@ -34,15 +35,34 @@ nav a {
 	border-radius: 0.25em;
 }
 
+#sidebarToggle {
+	position: fixed;
+	bottom: 5vh;
+	left: 0.938em;
+	font-size: 1.5em;
+	background: #333;
+	color: white;
+	border: none;
+	padding: 0.625em 0.938em;
+	cursor: pointer;
+	z-index: 1000;
+	border-radius: 0.313em;
+}
+
+#closeSidebar {
+	position: absolute;
+	top: 0.625em;
+	right: 0.938em;
+	font-size: 1.875em;
+	background: none;
+	border: none;
+	color: white;
+	cursor: pointer;
+}
+
 nav a:hover {
 	color: #666;
 	background-color: #222222;
-}
-
-h2 a {
-	padding: 0.25em;
-	color: #e0e0e0;
-	border-radius: 0.25em;
 }
 
 h2 a:hover {
@@ -72,11 +92,13 @@ samp {
 }
 
 pre {
-	background-color: #1e1e1e;
-	color: #f5f5f5;
-	padding: 1.25em;
-	border-radius: 0.25em;
-	overflow-x: auto;
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    padding: 1.25em;
+    border-radius: 0.25em;
+    width: fit-content;
+    max-width: 100%;
+	overflow: auto;
 }
 
 ul, ol {

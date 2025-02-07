@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<title>The Roblox Documentation</title>
 
 	<link rel="stylesheet" href="shared/default.css">
@@ -47,7 +48,7 @@
 			</p>
 		<br>
 
-		<h2>What is a DataModel in Roblox?</h2>
+		<h2 id="what-is-datamodel">What is a DataModel in Roblox?</h2>
 		<p>
 			A DataModel is a structure that is the equivalent of the <samp style="color: aquamarine">game</samp> global variable in Roblox Studio.<br>
 			It serves as the core structure that holds the entire game's environment, including objects, services, etc.<br>
@@ -55,7 +56,7 @@
 		</p>
 		<br>
 
-		<h3>What is a fake DataModel?</h3>
+		<h3 id="what-is-fake-datamodel">What is a fake DataModel?</h3>
 		<p>
 			A "fake DataModel" in Roblox actually refers to a job in the Roblox task scheduler that manages the real DataModel.<br>
 			9/10 times when trying to get the real DataModel you will find the fake DataModel since a lot of objects that "mess" with the DataModel store a pointer to the fake one.<br>
@@ -64,31 +65,54 @@
 		<br>
 
 		<h3 id="fake-datamodel">How to get the fake DataModel?</h3>
-		<p>
-			To get the fake DataModel all you have to do is read the pointer at <samp style="color: mediumslateblue;">0x8</samp> within the DataModel deleter.<br>
-			For example: <pre>
+			<p>
+				To get the fake DataModel all you have to do is read the pointer at <samp style="color: mediumslateblue;">0x8</samp> within the DataModel deleter.<br>
+				For example: <pre>
 <span style="color: mediumseagreen;">uintptr_t</span> deleterAddress = mem::<span style="color: rgb(255, 222, 122)">rebase</span>(offsets::<span style="color: gray">Deleter</span>);
 <span style="color: mediumseagreen;">uintptr_t</span> fakeDataModelAddress = mem::<span style="color: rgb(255, 222, 122)">read</span>&lt;<span style="color: mediumseagreen;">uintptr_t</span>&gt;(<span style="color: gray;">deleterAddress</span> + <span style="color: mediumslateblue;">0x8</span>)</pre>
-			Getting the deleter address is very easy that's why I chose this method.
-			Here is a step by step tutorial on getting the deleter address by me:
-			<ol>
-				<li>Search for "%s. Retrying... (%d)" in Strings sub-view in IDA</li>
-				<li>Scroll down until you see something among the lines of: <pre><span style="color: gray;">LABEL_55:</span>
+				Getting the deleter address is very easy that's why I chose this method.
+				Here is a step by step tutorial on getting the deleter address by me:
+				<ol>
+					<li>Search for "%s. Retrying... (%d)" in Strings sub-view in IDA</li>
+					<li>Scroll down until you see something among the lines of: <pre><span style="color: gray;">LABEL_55:</span>
 	<span style="color: gray;">v30</span> = <span style="color: rgb(255, 222, 122)">sub_7088C0</span>(); <span style="color: green">// This is the function we need</span>
 	<span style="color: rgb(255, 222, 122)">sub_70AEB0</span>(<span style="color: gray;">v30</span>, <span style="color: mediumslateblue;">1LL</span>, &<span style="color: gray">v9</span>, <span style="color: mediumslateblue;">0xFFFFFFFFFLL</span>)</pre>
-				<li>Double click on the function to go to it.</li>
-				<li>The return value of that function is the DataModel deleter. For example: <samp><span style="color: salmon">return</span> &<span style="color: rgb(255, 222, 122)">unk_5BC01C0</span>;</samp> 0x5BC01C0(in this case) being the deleter's address.</li>
-			</ol>
-		</p>
+					<li>Double click on the function to go to it.</li>
+					<li>The return value of that function is the DataModel deleter. For example: <samp><span style="color: salmon">return</span> &<span style="color: rgb(255, 222, 122)">unk_5BC01C0</span>;</samp> 0x5BC01C0(in this case) being the deleter's address.</li>
+				</ol>
+			</p>
 		<br>
 
 		<h3 id="real-datamodel">How to get the real DataModel?</h3>
-		<p>
-			Getting the real DataModel is very easy if you have the fake DataModel.<br>
-			All you have to do is read the pointer at <samp style="color: mediumslateblue;">0x1a8</samp> within the fake DataModel.<br>
-			For example: <samp><span style="color: mediumseagreen;">uintptr_t</span> dataModelAddress = mem::<span style="color: rgb(255, 222, 122)">read</span>&lt;<span style="color: mediumseagreen;">uintptr_t</span>&gt;(<span style="color: gray">fakeDataModelAddress</span> + <span style="color: mediumslateblue;">0x1a8</span>)</samp>.<br>
-			Then you can create an instance class(if you already have one) with that address: <samp><span style="color: mediumslateblue;">auto</span> game = RBX::<span style="color: mediumseagreen;">Instance</span>(<span style="color: gray;">dataModelAddress</span>)</samp>.<br>
-		</p>
+			<p>
+				Getting the real DataModel is very easy if you have the fake DataModel.<br>
+				All you have to do is read the pointer at <samp style="color: mediumslateblue;">0x1a8</samp> within the fake DataModel.<br>
+				For example: <samp><span style="color: mediumseagreen;">uintptr_t</span> dataModelAddress = mem::<span style="color: rgb(255, 222, 122)">read</span>&lt;<span style="color: mediumseagreen;">uintptr_t</span>&gt;(<span style="color: gray">fakeDataModelAddress</span> + <span style="color: mediumslateblue;">0x1a8</span>)</samp>.<br>
+				Then you can create an instance class(if you already have one) with that address: <samp><span style="color: mediumslateblue;">auto</span> game = RBX::<span style="color: mediumseagreen;">Instance</span>(<span style="color: gray;">dataModelAddress</span>)</samp>.<br>
+			</p>
+		<br>
+
+		<h2 id="what-is-visual-engine">What is Visual Engine in Roblox?</h2>
+			<p>
+				The Visual Engine in Roblox is the rendering engine responsible for processing and displaying 3D graphics.<br>
+				It handles rendering optimizations, lighting, and effects to ensure smooth performance across different devices.<br>
+				With the Visual Engine, you rendering details, such as screen dimensions and the view matrix for ESP or aimbots.<br>
+				To get the client dimensions all you have to do is: <samp>mem::<span style="color: rgb(255, 222, 122)">read</span>&lt;<span style="color: mediumseagreen;">vector2_t</span>&gt;(<span style="color: gray;">visualEngineAddress</span> + offsets::<span style="color: gray;">Dimensions</span>)</samp><br>
+				And to get the view matrix: <samp>mem::<span style="color: rgb(255, 222, 122)">read</span>&lt;<span style="color: mediumseagreen;">matrix4_t</span>&gt;(<span style="color: gray;">visualEngineAddress</span> + offsets::<span style="color: gray;">ViewMatrix</span>)</samp><br>
+			</p>
+		<br>
+
+		<h2 id="roblox-types">Basic Roblox Types</h2>
+			<p>
+				Roblox uses it's own types for things like vectors, matricies, etc.<br>
+				<br>
+				Here are some of them:
+				<ul>
+					<li><samp><span style="color: #007acc">struct</span> <span style="color: mediumseagreen;">matrix4_t</span> <span style="color: #007acc">final</span> { <span style="color: #007acc">float</span> data[<span style="color: mediumslateblue">16</span>]; }</samp></li>
+					<li><samp><span style="color: #007acc">struct</span> <span style="color: mediumseagreen;">vector3_t</span> <span style="color: #007acc">final</span> { <span style="color: #007acc">float</span> x, y, z; }</samp></li>
+					<li><samp><span style="color: #007acc">struct</span> <span style="color: mediumseagreen;">vector2_t</span> <span style="color: #007acc">final</span> { <span style="color: #007acc">float</span> x, y; }</samp></li>
+				</ul>
+			</p>
 		<br>
 	</div>
 </body>
